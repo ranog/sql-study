@@ -14,6 +14,9 @@ run: build
 		--detach \
 		preloaded_db:new
 
+stop:
+	@docker stop preloaded_db
+
 remove:
 	@docker rm -f preloaded_db
 
