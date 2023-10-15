@@ -72,3 +72,30 @@ SELECT GENERATE_SERIES
   FROM GENERATE_SERIES(1, 9000);
 
 VACUUM ANALYZE employees;
+
+-- The next script introduces the index on SUBSIDIARY_ID to support the query for all employees of one particular subsidiary:
+CREATE INDEX emp_sub_id ON employees (subsidiary_id);
+
+-- Although that gives decent performance, it’s better to use the index that supports the primary key:
+
+-- use tmp index to support the PK
+CREATE UNIQUE INDEX employee_pk_tmp
+    ON employees (subsidiary_id, employee_id);
+
+ ALTER TABLE employees
+   ADD CONSTRAINT employees_pk_tmp
+UNIQUE (subsidiary_id, employee_id);
+
+ALTER TABLE employees
+ DROP CONSTRAINT employees_pk;
+
+ALTER TABLE employees
+  ADD CONSTRAINT employees_pk
+      PRIMARY KEY (subsidiary_id, employee_id);
+
+ALTER TABLE employees
+ DROP CONSTRAINT employees_pk_tmp;
+
+-- drop old indexes
+DROP INDEX employee_pk_tmp;
+DROP INDEX emp_sub_id;
