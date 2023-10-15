@@ -1,3 +1,4 @@
+-- The following script creates the EMPLOYEES table with 1000 entries.
 CREATE TABLE employees (
    employee_id   NUMERIC       NOT NULL,
    first_name    VARCHAR(1000) NOT NULL,
