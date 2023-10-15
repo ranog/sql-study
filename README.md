@@ -1,5 +1,5 @@
 # SQL study
-Repro de estudo do livro [SQL Performance Explained Volume 1 — Basic Indexing - Markus Winand](https://use-the-index-luke.com/)
+Repo de estudo do livro [SQL Performance Explained Volume 1 — Basic Indexing - Markus Winand](https://use-the-index-luke.com/)
 
 # Referências bibliográficas:
 
