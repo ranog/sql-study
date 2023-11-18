@@ -1,5 +1,5 @@
 # dump build stage
-FROM postgres:11-alpine as dumper
+FROM postgres:latest as dumper
 
 COPY init.sql /docker-entrypoint-initdb.d/
 
@@ -12,6 +12,6 @@ ENV POSTGRES_HOST_AUTH_METHOD=trust
 RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
 
 # final build stage
-FROM postgres:11-alpine
+FROM postgres
 
 COPY --from=dumper /data $PGDATA
